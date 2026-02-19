@@ -16,8 +16,8 @@ Deployment: Render (API), Vercel/Netlify (Frontend)
 - Dashboard summary
 
 ## Default Admin Credentials
-Username: admin
-Password: Admin@123
+Phone Number: 9999988888
+Password: Yashdeep@123
 
 ## Local Setup
 
