@@ -7,7 +7,7 @@ A lightweight Human Resource Management System allowing admin to manage employee
 Frontend: Angular
 Backend: FastAPI
 Database: PostgreSQL (Neon)
-Deployment: Render (API), Vercel/Netlify (Frontend)
+Deployment: Render (API), Render (Frontend)
 
 ## Features
 - Add, list, delete employees
