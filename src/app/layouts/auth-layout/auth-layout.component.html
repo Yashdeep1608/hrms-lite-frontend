@@ -34,15 +34,6 @@
     ></div>
 
     <div class="text-white max-w-xl space-y-8 font-sans relative z-10">
-      <!-- Logo -->
-      <div class="w-full justify-center flex flex-row">
-        <img
-          src="/assets/logo/favicon.png"
-          alt="Kriyato Logo"
-          class="w-40 object-contain mb-2 animate-fade-in"
-        />
-      </div>
-
       <!-- Brand + Tagline -->
       <div class="animate-fade-in delay-200 w-full justify-center space-y-4">
         <!-- Main Slogan -->
@@ -63,89 +54,7 @@
         <p class="text-lg font-sans opacity-80 mt-2 animate-fade-in delay-700">
           {{ "supporting" | translate }}
         </p>
-      </div>
-
-      <!-- Feature Cards -->
-      <div
-        class="grid grid-cols-1 lg:grid-cols-2 gap-4 animate-fade-in delay-600"
-      >
-        <div
-          class="bg-white/10 p-4 rounded-lg flex items-start space-x-3 hover:scale-105 transition-all"
-        >
-          <span class="text-3xl">📊</span>
-          <div>
-            <h3 class="font-semibold">{{ "crm_title" | translate }}</h3>
-            <p class="text-sm opacity-80">{{ "crm_desc" | translate }}</p>
-          </div>
-        </div>
-
-        <div
-          class="bg-white/10 p-4 rounded-lg flex items-start space-x-3 hover:scale-105 transition-all"
-        >
-          <span class="text-3xl">⚙️</span>
-          <div>
-            <h3 class="font-semibold">{{ "erp_title" | translate }}</h3>
-            <p class="text-sm opacity-80">{{ "erp_desc" | translate }}</p>
-          </div>
-        </div>
-
-        <div
-          class="bg-white/10 p-4 rounded-lg flex items-start space-x-3 hover:scale-105 transition-all"
-        >
-          <span class="text-3xl">📢</span>
-          <div>
-            <h3 class="font-semibold">{{ "marketing_title" | translate }}</h3>
-            <p class="text-sm opacity-80">{{ "marketing_desc" | translate }}</p>
-          </div>
-        </div>
-
-        <div
-          class="bg-white/10 p-4 rounded-lg flex items-start space-x-3 hover:scale-105 transition-all"
-        >
-          <span class="text-3xl">💡</span>
-          <div>
-            <h3 class="font-semibold">{{ "smallbiz_title" | translate }}</h3>
-            <p class="text-sm opacity-80">{{ "smallbiz_desc" | translate }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="mt-6 animate-fade-in delay-1000 text-center">
-        <!-- Main Button -->
-        <a
-          href="https://www.kriyato.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center px-6 py-3 rounded-lg bg-secondary-500 hover:bg-secondary-600 text-white font-semibold shadow-lg transition-all transform hover:scale-105"
-        >
-          {{ "learn_more" | translate }}
-          <svg
-            class="w-5 h-5 ml-2 animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
-
-        <!-- Terms & Privacy Links -->
-        <div class="mt-4 text-sm opacity-80 space-x-4">
-          <a routerLink="/terms-and-conditions" class="hover:underline">
-            {{ "termsConditions" | translate }}
-          </a>
-          <span>|</span>
-          <a routerLink="/privacy-policy" class="hover:underline">
-            {{ "privacy" | translate }}
-          </a>
-        </div>
-      </div>
+      </div> 
     </div>
   </div>
 </div>

@@ -50,20 +50,12 @@ export class SideNavComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    this.authService.userSubject$.subscribe((userData: any) => {
-      const data = userData || JSON.parse(localStorage.getItem('user') || '{}');
-      this.userDetails = data;
-      const user = data?.user;
-      this.user = user || JSON.parse(localStorage.getItem('user') || '{}')?.user;
-      if (!user) return;
-      // ✅ Filter menu (only userPermissions + businessType)
-      let menus = MenuUtils.filterMenu(MENU_ITEMS);
+    let menus = MENU_ITEMS;
 
-      // ✅ Auto-expand matching route
-      menus = MenuUtils.expandMenusForRoute(menus, this.router.url);
+    // ✅ Auto-expand matching route
+    menus = MenuUtils.expandMenusForRoute(menus, this.router.url);
 
-      this.menuItems = menus;
-    });
+    this.menuItems = menus;
   }
   getInitials(first: string, last: string): string {
     if (!first && !last) return 'U';
