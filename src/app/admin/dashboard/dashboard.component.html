@@ -1,0 +1,37 @@
+<div class="p-6 space-y-6">
+
+  <h2 class="text-2xl font-bold">HRMS Dashboard</h2>
+
+  <div *ngIf="loading" class="text-center text-gray-500">
+    Loading dashboard...
+  </div>
+
+  <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+    <!-- Total Employees -->
+    <div class="bg-white shadow rounded-xl p-6 text-center">
+      <h3 class="text-gray-500 text-sm">Total Employees</h3>
+      <p class="text-3xl font-bold text-blue-600">{{ totalEmployees }}</p>
+    </div>
+
+    <!-- Total Attendance -->
+    <div class="bg-white shadow rounded-xl p-6 text-center">
+      <h3 class="text-gray-500 text-sm">Total Attendance Records</h3>
+      <p class="text-3xl font-bold text-purple-600">{{ totalAttendance }}</p>
+    </div>
+
+    <!-- Present Today -->
+    <div class="bg-white shadow rounded-xl p-6 text-center">
+      <h3 class="text-gray-500 text-sm">Present Today</h3>
+      <p class="text-3xl font-bold text-green-600">{{ presentToday }}</p>
+    </div>
+
+    <!-- Absent Today -->
+    <div class="bg-white shadow rounded-xl p-6 text-center">
+      <h3 class="text-gray-500 text-sm">Absent Today</h3>
+      <p class="text-3xl font-bold text-red-600">{{ absentToday }}</p>
+    </div>
+
+  </div>
+
+</div>
