@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: kriyato-ui
+    env: static
+    buildCommand: |
+      npm install -g @angular/cli
+      npm install
+      ng build --configuration production
+    staticPublishPath: dist/business-portal/browser # change if your Angular dist folder is different
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

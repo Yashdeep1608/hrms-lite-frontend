@@ -1,0 +1,432 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$business-portal-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($business-portal-theme);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  border-style: hidden;
+}
+:root {
+  --color-primary: #1B5A64;
+  --color-primary-dark: #123c45;
+  --color-secondary: #3C4DB2;
+  --color-secondary-dark: #2a3984;
+  --color-accent: #1A1F3A;
+
+  --color-success: #20B66F;
+  --color-success-dark: #15824F;
+  --color-success-light: #C8F4DE;
+
+  --color-cancel: #EF4E4E;
+  --color-cancel-dark: #B91C1C;
+  --color-cancel-light: #FDE0E0;
+
+  --color-confirm: #0DAAD3;
+  --color-confirm-dark: #087E9C;
+  --color-confirm-light: #CCF2FA;
+
+  --color-info: #3C82F6;
+  --color-info-dark: #1D4ED8;
+  --color-info-light: #DBEAFE;
+
+  --color-add: #1BBF8B;
+  --color-add-dark: #0F9D68;
+  --color-add-light: #C9F5E4;
+
+  --color-edit: #F5A500;
+  --color-edit-dark: #B36A00;
+  --color-edit-light: #FEF2C3;
+
+  --color-dark: #121212;
+  --color-light: #ffffff;
+}
+
+.dark {
+  --color-success: #20B66F;
+  --color-success-dark: #15824F;
+
+  --color-cancel: #EF4E4E;
+  --color-cancel-dark: #B91C1C;
+
+  --color-confirm: #0DAAD3;
+  --color-confirm-dark: #087E9C;
+
+  --color-info: #3C82F6;
+  --color-info-dark: #1D4ED8;
+
+  --color-add: #1BBF8B;
+  --color-add-dark: #0F9D68;
+
+  --color-edit: #F5A500;
+  --color-edit-dark: #B36A00;
+}
+
+/* Apply full height and smooth transitions */
+html {
+  @apply h-full transition-colors duration-300 bg-light text-dark;
+}
+
+/* Dark mode uses class on html (Tailwind standard) */
+html.dark {
+  @apply bg-dark text-light transition-colors duration-300;
+}
+
+/* Font families by language — class set dynamically on <body> */
+body.lang-hi {
+  font-family: 'Mukta', sans-serif;
+}
+
+body.lang-en,
+body.lang-hi-en {
+  font-family: 'Mukta', sans-serif;
+}
+/* Headings */
+h1 {
+  @apply text-4xl font-extrabold;
+}
+h2 {
+  @apply text-3xl font-extrabold;
+}
+h3 {
+  @apply text-2xl font-extrabold;
+}
+h4 {
+  @apply text-xl font-extrabold;
+}
+h5 {
+  @apply text-lg font-extrabold;
+}
+h6 {
+  @apply text-sm font-extrabold;
+}
+p {
+  @apply text-base;
+}
+
+/* Button Utilities */
+.btn {
+  @apply px-4 py-2 rounded text-white font-semibold transition-colors duration-200;
+}
+
+.btn-success {
+  background-color: var(--color-success);
+}
+.btn-success:hover {
+  background-color: var(--color-success-dark);
+}
+
+.btn-cancel {
+  background-color: var(--color-cancel);
+}
+.btn-cancel:hover {
+  background-color: var(--color-cancel-dark);
+}
+
+.btn-confirm {
+  background-color: var(--color-confirm);
+}
+.btn-confirm:hover {
+  background-color: var(--color-confirm-dark);
+}
+
+.btn-info {
+  background-color: var(--color-info);
+}
+.btn-info:hover {
+  background-color: var(--color-info-dark);
+}
+
+.btn-add {
+  background-color: var(--color-add);
+}
+.btn-add:hover {
+  background-color: var(--color-add-dark);
+}
+
+.btn-edit {
+  background-color: var(--color-edit);
+}
+.btn-edit:hover {
+  background-color: var(--color-edit-dark);
+}
+
+.tab-link {
+  @apply relative px-2 py-1 transition text-sm font-medium text-gray-300 hover:text-white;
+}
+
+.active-tab {
+  @apply text-white font-semibold border-b-2;
+}
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  // margin-top: 0px;
+  // margin-left: -10px;
+  border-radius: 50%;
+  border: 3px solid var(--color-add-light);
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+button:disabled{
+  background-color: var(--color-add-light);
+  border: 1px solid #000000;
+  color: #000000;
+}
+button:disabled:hover{
+  background-color: var(--color-add-light);
+  border: 1px solid #000000;
+  color: #000000;
+}
+.input-valid {
+  border-color: var(--color-primary) !important; /* Tailwind border-gray-300 */
+  --tw-ring-color: var(--color-primary) !important; /* Tailwind primary-500 (adjust if different) */
+}
+
+.dark .input-valid {
+  border-color: var(--color-primary-dark) !important; /* Tailwind dark:border-gray-700 */
+}
+
+.input-invalid {
+  border-color: var(--color-cancel-dark) !important; /* Tailwind border-red-500 */
+  --tw-ring-color:  var(--color-cancel-dark) !important; /* Tailwind ring-red-500 */
+}
+
+.input-base {
+  @apply w-full px-4 py-2 rounded-lg bg-white dark:bg-primary-700 text-gray-900 dark:text-white focus:outline-none;
+}
+// Use this to set a modern look for all mat-form-fields
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 0.5rem; // Rounded corners
+  border-width: 1px;
+}
+
+.mat-form-field {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  border-width: 2px;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  border-color: var(--color-primary); // Indigo-500 or your primary color
+}
+
+// Label style
+.mat-form-field-label {
+  font-weight: 500;
+  color: #4b5563; // Gray-700
+}
+::ng-deep .mat-select-trigger {
+  font-weight: 500;
+}
+
+::ng-deep .mat-select {
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+::ng-deep .mat-select-panel {
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch{
+  border-right: none !important;
+}
+
+html.dark .NgxEditor__MenuBar {
+    background-color: var(--color-primary-dark);
+}
+html.dark .NgxEditor__MenuItem--Icon:hover,
+html.dark .NgxEditor__Dropdown:hover,
+html.dark .NgxEditor__Dropdown--Text:hover {
+    color: var(--color-primary-dark);
+}
+
+html.dark .NgxEditor__Content {
+  background-color: var(--color-primary-dark);
+  color: #f3f4f6;
+}
+/* Default (Light Theme) */
+html:not(.dark) .swal2-popup {
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+
+html:not(.dark) .swal2-confirm {
+  @apply bg-primary-300 text-gray-100
+}
+html:not(.dark) .swal2-confirm:hover {
+  @apply bg-primary-400
+}
+html:not(.dark) .swal2-cancel {
+  @apply bg-red-500 text-gray-100
+}
+html:not(.dark) .swal2-cancel:hover {
+  @apply bg-red-600
+}
+
+
+/* Dark Theme */
+html.dark .swal2-popup {
+  background-color: var(--color-dark) !important;
+  color: #f1f1f1 !important;
+}
+
+html.dark .swal2-confirm {
+  background-color: var(--color-confirm-dark) !important;
+  color: #fff !important;
+}
+
+html.dark .swal2-cancel {
+  background-color: var(--color-cancel-dark) !important;
+  color: #fff !important;
+}
+
+/* Additional custom styling for SweetAlert2 popups */
+html.dark .swal2-popup {
+  border-radius: 8px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+html:not(.dark) .swal2-popup {
+  border-radius: 8px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+.company-logo {
+  filter: drop-shadow(2px 0px 4px rgb(0, 22, 18));
+}
+/* Optional: Set transition for smooth theme switching */
+.swal2-popup {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+/* Light Theme (Default) */
+html:not(.dark) .swal2-icon.swal2-warning {
+  @apply border border-primary-400 text-primary-400
+}
+
+html:not(.dark) .swal2-icon.swal2-info {
+  border: var(--color-primary-light) 1px solid !important;
+  color: var(--color-primary-light) !important;
+}
+
+html:not(.dark) .swal2-icon.swal2-success {
+  border: var(--color-success) 1px solid !important;
+  color: var(--color-success) !important;
+}
+
+html:not(.dark) .swal2-icon.swal2-error {
+  border: var(--color-cancel) 1px solid !important;
+  color: var(--color-cancel) !important;
+}
+
+/* Dark Theme */
+html.dark .swal2-icon.swal2-warning {
+  border: var(--color-primary-dark) 1px solid !important;
+  color: var(--color-primary-dark) !important;
+}
+
+html.dark .swal2-icon.swal2-info {
+  border: var(--color-primary-dark) 1px solid !important;
+  color: var(--color-primary-dark) !important;
+}
+
+html.dark .swal2-icon.swal2-success {
+  border: var(--color-primary-dark) 1px solid !important;
+  color: var(--color-primary-dark) !important;
+}
+
+html.dark .swal2-icon.swal2-error {
+  border: var(--color-primary-dark) 1px solid !important;
+  color: var(--color-primary-dark) !important;
+}
+
+/* Optional: You can also style the icon background for dark mode */
+html.dark .swal2-icon {
+  background-color: #333 !important;  /* For dark theme icon background */
+}
+
+html:not(.dark) .swal2-icon {
+  background-color: #f1f1f1 !important;  /* For light theme icon background */
+}
+
+/* Optional: Set transition for icon appearance */
+.swal2-icon {
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-light); /* slate-500/50 */
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-dark); /* slate-500/70 */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-dark) transparent;
+}
+input[type='checkbox'] {
+  accent-color: var(--color-primary);
+}
+.toast-top-center {
+  top: 0.5rem !important
+}
+.ngx-toastr{
+  font-size: 12px !important;
+  border-radius: 1rem !important;
+}
+.mat-mdc-menu-panel{
+  background-color: #fff !important;
+}

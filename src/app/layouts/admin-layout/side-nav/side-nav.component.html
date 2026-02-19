@@ -1,0 +1,185 @@
+<nav
+  *ngIf="isSidebarOpen"
+  class="h-full w-full pr-2 rounded-r-sm drop-shadow-custom text-white bg-gradient-primary-deep-diagonal flex flex-col"
+>
+  <!-- Sidebar Toggle -->
+
+  <div class="flex justify-start md:justify-end items-center">
+    <button
+      mat-icon-button
+      aria-label="Toggle Sidebar"
+      (click)="onToggleSidebar()"
+    >
+      <mat-icon class="text-white">menu</mat-icon>
+    </button>
+  </div>
+
+  <!-- User Profile Section -->
+  <div
+    class="flex flex-col items-center gap-3 px-4 py-4 border-b border-white/20"
+  >
+    <div
+      class="w-24 h-24 rounded-full bg-white text-primary-800 flex items-center justify-center font-semibold text-lg overflow-hidden"
+    >
+      <ng-container *ngIf="user?.profile_image; else fallbackAvatar">
+        <img
+          [src]="user.profile_image"
+          alt="Profile"
+          class="w-full h-full object-cover rounded-full"
+        />
+      </ng-container>
+      <ng-template #fallbackAvatar>
+        {{ getInitials(user?.first_name, user?.last_name) }}
+      </ng-template>
+    </div>
+    <div class="flex flex-col justify-center items-center space-y-1">
+      <!-- User Name + Badge -->
+      <div class="flex items-center gap-2">
+        <span class="text-sm font-medium text-white">
+          {{ user?.first_name }} {{ user?.last_name }}
+        </span>
+
+        <!-- Badge -->
+        <span
+          *ngIf="userPlan === 'free'"
+          class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-yellow-400 text-gray-900 shadow-sm"
+        >
+          {{ "free" | translate }}
+        </span>
+
+        <span
+          *ngIf="userPlan === 'pro'"
+          class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gradient-to-r from-green-400 to-teal-500 text-gray-900 shadow-md"
+        >
+          {{ "pro" | translate }}
+        </span>
+      </div>
+
+      <!-- Username -->
+      <span class="text-sm text-gray-300">
+        {{ user?.username }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <ul class="flex-1 overflow-auto mt-2">
+    <li *ngFor="let item of menuItems">
+      <!-- No children -->
+      <ng-container *ngIf="!item?.children">
+        <a
+          *ngIf="!item.locked; else lockedItem"
+          [routerLink]="item?.route"
+          routerLinkActive="bg-primary-500 my-2 font-semibold"
+          (click)="onNavClick()"
+          class="flex gap-3 px-4 py-2 rounded-tr-3xl rounded-br-3xl hover:bg-primary-500 transition-all"
+        >
+          <mat-icon>{{ item?.icon }}</mat-icon>
+          {{ item.label | translate }}
+        </a>
+
+        <!-- Locked Item -->
+        <ng-template #lockedItem>
+          <div
+            matTooltip="Upgrade to Pro to unlock"
+            class="flex gap-3 px-4 py-2 rounded-tr-3xl rounded-br-3xl cursor-not-allowed"
+          >
+            <mat-icon>{{ item?.icon }}</mat-icon>
+            {{ item.label | translate }}
+            <!-- Premium Lock Badge -->
+            <span
+              class="ml-auto flex items-center gap-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-0.5 rounded-full shadow-md"
+            >
+              <mat-icon class="!text-sm">lock</mat-icon>
+              {{ "pro" | translate }}
+            </span>
+          </div>
+        </ng-template>
+      </ng-container>
+
+      <!-- With children -->
+      <ng-container *ngIf="item?.children">
+        <!-- Parent Menu Button -->
+        <button
+          (click)="toggle(item)"
+          class="flex items-center justify-between w-full text-left px-4 py-2 rounded-tr-3xl rounded-br-3xl hover:bg-primary-500 transition-all"
+          [ngClass]="{
+            'bg-primary-500 font-semibold': isParentRouteActive(item)
+          }"
+          [disabled]="item.locked"
+          [matTooltip]="item.locked ? 'Upgrade to Pro to unlock' : ''"
+        >
+          <div
+            class="flex items-center gap-3 opacity-100"
+            [ngClass]="{ ' cursor-not-allowed': item.locked }"
+          >
+            <mat-icon>{{ item?.icon }}</mat-icon>
+            <span>{{ item.label | translate }}</span>
+          </div>
+          <mat-icon *ngIf="!item.locked">
+            {{ item?.expanded ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+          <!-- Premium Lock Badge -->
+          <span
+            *ngIf="item.locked"
+            class="ml-auto flex items-center gap-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-0.5 rounded-full shadow-md"
+          >
+            <mat-icon class="!text-sm">lock</mat-icon>
+            {{ "pro" | translate }}
+          </span>
+        </button>
+
+        <!-- Child Items -->
+        <ul
+          class="mt-1 ml-4"
+          [@expandCollapse]="item?.expanded ? 'expanded' : 'collapsed'"
+          *ngIf="!item.locked"
+        >
+          <li *ngFor="let child of item?.children">
+            <a
+              *ngIf="!child.locked; else lockedChild"
+              [routerLink]="child.route"
+              routerLinkActive="bg-primary-500 font-semibold"
+              (click)="onNavClick()"
+              class="flex items-center gap-3 px-4 py-2 rounded-tr-3xl rounded-br-3xl hover:bg-primary-500 transition-all"
+            >
+              <mat-icon>{{ child?.icon }}</mat-icon>
+              <span>{{ child.label | translate }}</span>
+            </a>
+
+            <!-- Locked Child -->
+            <ng-template #lockedChild>
+              <div
+                matTooltip="Upgrade to Pro to unlock"
+                class="flex items-center gap-3 px-4 py-2 rounded-tr-3xl rounded-br-3xl cursor-not-allowed"
+              >
+                <mat-icon>{{ child?.icon }}</mat-icon>
+                <span>{{ child.label | translate }}</span>
+                <!-- Premium Lock Badge -->
+                <span
+                  class="ml-auto flex items-center gap-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-0.5 rounded-full shadow-md"
+                >
+                  <mat-icon class="!text-sm">lock</mat-icon>
+                  {{ "pro" | translate }}
+                </span>
+              </div>
+            </ng-template>
+          </li>
+        </ul>
+      </ng-container>
+    </li>
+  </ul>
+
+  <div class="mt-6 text-center space-x-4">
+    <a
+      routerLink="/terms-and-conditions"
+      class="text-sm text-white hover:text-primary-400 underline"
+      >{{ "termsConditions" | translate }}</a
+    >
+    <a
+      routerLink="/privacy-policy"
+      class="text-sm text-white hover:text-primary-400 underline"
+      >{{ "privacy" | translate }}</a
+    >
+  </div>
+</nav>
